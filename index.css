@@ -1,3 +1,32 @@
 body{
     background:#FFFFaa
 }
+
+div p { /* all the p that are contained in a div */
+    background-color: green;
+}
+
+#iampurplenomatterwhat{
+    color: purple;
+}
+
+p.whiteText { /* all the p elements with class containing whiteText */
+    color:white;
+}
+
+div p.whiteText{
+    color: red;
+}
+
+div p.whiteText:hover{
+    color: blue;
+    font-size:50px;
+}
+
+.whiteText { /* */
+    border: 1px solid black
+}
+
+#firstParagraph{ /* the element with id FirstParagraph */
+    font-size: 30px;
+}
