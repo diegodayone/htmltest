@@ -8,64 +8,67 @@
     </style>
   </head>
   <body>
-    <p > Test to see it this is working!!!</p>
-    <a href="#secondSection" class="class1">Click me</a>
-    <a href=".example">Click me for class</a>
-    These are the headings that we have:
-    <h1>Should be, only one per page. Semantically, it's the title of the page.</h1>
-    <h2>It's still an important title, but it's not the MAIN title</h2>
-    <h3>Goes as subtitle</h3>
-    <h4 style="color:purple">General purpose use</h4>
-    <h5>General purpose use</h5>
-    <h6>General purpose use</h6>
-
-    <ul>
-      <!-- unordered-->
-      <li class="whiteText">Strive</li>
-      <li>
-        <ol>
-          <!-- ordered-->
-          <li>First</li>
-          <li>Second</li>
-        </ol>
-      </li>
-    </ul>
-
-    <ol>
-      <!-- ordered-->
-      <li>First</li>
-      <li>Second</li>
-    </ol>
-
-    <!-- 
-        <img src="downloadedLogo.png" /> -->
-
-    <div>
-      <!-- Div is a container -->
-      <a href="secondPage.html" target="_blank" id="secondSection">
-        Click here for the second page
-        <img
-          src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1551226036668"
-        />
-      </a>
-      <p class="whiteText" id="firstParagraph">
-        This is a paragraph
-      </p>
-      <p class="whiteText" id="iampurplenomatterwhat">
-        This is a paragraph2
-      </p>
-      <p>
-        This is a paragraph3
-      </p>
-      <span>
-        This is a span
-      </span>
-      <span>
-        This is a span2
-      </span>
-      <span>
-        This is a span3
-      </span>
+    <div id="testDiv" onmouseenter="addBorder(event)" onmouseleave="removeBorder(event)">
+      <input type="text" onkeyup="consoleMe(event)" id="name" placeholder="Insert your name">
+      <input type="email" id="email" placeholder="Insert your email">
+      <input type="button" value="Save Data" onclick="getDataFromForm()">
+      <p id="successMessage" style="display: none;" onclick="hideMe()">The data has been saved!</p>
     </div>
+    <div id="testInnerHtml"></div>
+    <span id="selectedStudent"></span>
+
+    <script>
+
+      function addBorder(e){
+        e.currentTarget.style.border = "5px solid red"
+      }
+
+      function removeBorder(e){
+        e.currentTarget.style.border = ""
+      }
+
+      function consoleMe(e){
+        document.querySelector("#selectedStudent").innerText = e.currentTarget.value;
+      }
+
+      function hideMe() {
+        document.querySelector("#successMessage").style.display = "none"
+      }
+
+      function getDataFromForm(surname){
+        var email = document.querySelector("#email").value;
+        var name = document.querySelector("#name").value;
+        var data = {
+          name: name,
+          email: email,
+          surname: surname
+        }
+
+        //Creates a new Paragraph
+        var newStudent = document.createElement("p"); //create a new P
+        newStudent.innerText = data.name + data.email; //setting the content
+        newStudent.onclick = function(e) { //setting what happens when clicked
+          console.log(e.currentTarget);
+          //taking te reference to selectedStudent and setting the innerText as the one in the currentTarget
+          document.querySelector("#selectedStudent").innerText = e.currentTarget.innerText;
+          //e.currentTarget.style.display = "none";
+        }
+        //get the reference to the testInnerHTML div
+        var studentListDiv = document.querySelector("#testInnerHtml");
+        studentListDiv.appendChild(newStudent); //add the P to the DIV
+
+        document.querySelector("#email").value = ""
+        document.querySelector("#name").value = ""
+        document.querySelector("#successMessage").style.display = "block"
+        console.log(data)
+        return data
+
+        // return {
+        //   name: document.querySelector("#name").value,
+        //   email: document.querySelector("#email").value
+        // }
+      }
+    
+    </script>
   </body>
 </html>
